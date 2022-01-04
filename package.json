@@ -1,0 +1,15 @@
+{
+  "name": "demo-rule-engine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "21N",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^27.4.5"
+  }
+}
