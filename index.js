@@ -1,31 +1,41 @@
-let data = [[["price", "<", "1300"], "and", ["productName", "=", "6"]]];
 
 function JsonRuleResult(data) {
   let all = [];
-  let allObj;
+  let andObj;
 
   data.forEach((each) => {
     each.forEach((eachOne, j) => {
       switch (each[j]) {
         case "and":
-          allObj = {
-            fact: each[j + 1][0],
-            operator: each[j + 1][1],
-            value: each[j + 1][2],
+          const previousIndex = j-1
+
+          // Create Object for Previous Array
+          andObj = {
+            fact: each[previousIndex][0],
+            operator:getOperatorName(each[previousIndex][1]),
+            value: parseInt(each[previousIndex][2]),
           };
-          all.push(allObj);
-          allObj = {
-            fact: each[j - 1][0],
-            operator: each[j - 1][1],
-            value: each[j - 1][2],
+
+          all.push(andObj);
+          const nextIndex = j+1
+          // Create Object for Next Array
+          andObj = {
+            fact: each[nextIndex][0],
+            operator:getOperatorName(each[nextIndex][1]),
+            value: parseInt(each[nextIndex][2]),
           };
-          all.push(allObj);
+          all.push(andObj);
+        
+        case 'or':
+
+        
+
       }
     });
   });
   let any = [{ all }];
 
-  let demoData = {
+  let compleatObject = {
     conditions: { any },
     event: {
       type: "fouledOut",
@@ -35,7 +45,21 @@ function JsonRuleResult(data) {
     },
   };
 
-  return demoData;
+  function getOperatorName(value){
+    switch(value){
+      case '<':
+        return "lesserThanInclusive";
+      case '=':
+        return "equal";
+      case '>':
+        return 'greaterThanInclusive';
+      default :
+        return value
+    }
+  }
+
+  return compleatObject;
 }
 
 module.exports = JsonRuleResult;
+
