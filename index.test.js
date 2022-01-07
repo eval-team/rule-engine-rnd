@@ -1,4 +1,5 @@
 const JsonRuleResult = require("./index");
+const JsonRuleResultTwo=require('./index');
 const case1Data =require('./case1Data')
 const case2Data =require('./data')
   
@@ -101,7 +102,7 @@ test("Case 2", () => {
   };
 
   // Act
-  let exp = JsonRuleResult(input);
+  let exp = JsonRuleResultTwo(input);
 
   // Assert
   expect(exp).toStrictEqual(output);
